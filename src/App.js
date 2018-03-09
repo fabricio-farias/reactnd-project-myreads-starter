@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ListBooks from './ListBooks';
-import * as BooksAPI from './BooksAPI'
+import ListBooks from './components/ListBooks';
+import * as BooksAPI from './api/BooksAPI'
 import './App.css'
 
 class BooksApp extends Component {
@@ -17,7 +17,7 @@ class BooksApp extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then(
-      books => this.setState(books),
+      books => this.setState({ books }),
       error => console.error(error, "Ocorreu um problema ao listar os livros")
     )
   }
@@ -26,8 +26,6 @@ class BooksApp extends Component {
     return (
       <div className="app">
         <ListBooks books={this.state.books} />
-
-
       </div>
     )
   }
