@@ -3,29 +3,42 @@ import ListBooks from './components/ListBooks';
 import * as BooksAPI from './api/BooksAPI'
 import './App.css'
 
+/**
+ * @constructor It is the beginner of the app first class 
+ * @description App of Books, for sort my book reads
+ */
 class BooksApp extends Component {
+  
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     books: []
   }
 
+  /**
+   * @description is invoked immediately after a component is mounted
+   */
   componentDidMount() {
-    BooksAPI.getAll().then(
-      books => this.setState({ books }),
-      error => console.error(error, "Ocorreu um problema ao listar os livros")
-    )
+
+  /**
+   * @description Get from API server the list of books
+   * @return {array} - The books array 
+   */
+    BooksAPI.getAll()
+      .then(books => this.setState({ books }))
+      .catch(error => console.error(error, "Ocorreu um problema ao listar os livros"))
+  }
+  
+  changeShelf = (book) => {
+    console.log("changeShelf:-> ", book);
+
   }
 
   render() {
     return (
       <div className="app">
-        <ListBooks books={this.state.books} />
+        <ListBooks
+          books={this.state.books}
+          onChangeShelf={this.changeShelf}
+        />
       </div>
     )
   }
