@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import BookShelfs from './BookShelfs';
+import React from 'react'
+import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import BookShelfs from './BookShelfs'
 
 /**
  * @description It render the top of page em title too
@@ -9,18 +10,8 @@ import BookShelfs from './BookShelfs';
  */
 const ListBooks = ({books, onChangeShelf}) =>  {
  
-  /**
-   * @description Get shelf key from books object and reduce duplicity
-   * @param {array} books - The list of books
-   * @return {array} - The shelfs title from books shelf key
-   */
-  const getShelfs = (books) => {
-    if (Array.isArray(books)) {
-      let shelfs = [];
-      books.map(book => shelfs.push(book.shelf));
-      return shelfs.filter((shelf, index, arr) => !index || shelf !== arr[index - 1]);
-    }
-  };
+  // Array with shelfs keyof shelfs
+  const shelfs = ["currentlyReading", "wantToRead", "read"];
 
   return (
     <div className="list-books">
@@ -29,10 +20,13 @@ const ListBooks = ({books, onChangeShelf}) =>  {
       </div>
       <div className="list-books-content">
         <BookShelfs
-          shelfs={getShelfs(books)}
+          shelfs={shelfs}
           books={books}
           onChangeShelf={onChangeShelf}
         />
+      </div>
+      <div className="open-search">
+        <Link to="/search">Add a book</Link>
       </div>
     </div>
   )

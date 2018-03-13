@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Books from './Books';
-import uncamelCase from 'uncamelcase';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Books from './Books'
+import uncamelCase from 'uncamelcase'
 
 /**
  * @description It render the shelfs of ListBooks
@@ -19,20 +19,20 @@ const BookShelfs = ({ shelfs, books, onChangeShelf }) => {
   const getBookByShelf = (shelf) => {
     return books.filter(book => book.shelf === shelf);
   };
-  
+
   return (
     <div>
       {shelfs.map((shelf, index) => (
         <div className="bookshelf" key={index}>
           <h2 className="bookshelf-title">{uncamelCase(shelf)}</h2>
-            <div className="bookshelf-books">
+          <div className="bookshelf-books">  
             <Books
               shelfs={shelfs}
               books={getBookByShelf(shelf)}
               onChangeShelf={onChangeShelf}
             />
-            </div>
           </div>
+        </div>
       ))}
     </div>  
   )
